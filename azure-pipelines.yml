@@ -24,7 +24,7 @@ stages:
       inputs:
         packageType: 'sdk'
         #version: '3.0.100-preview6-012264'
-        version: '2.2.6'
+        version: '2.2.301'
         includePreviewVersions: true
 
     # - task: DotNetCoreCLI@2
