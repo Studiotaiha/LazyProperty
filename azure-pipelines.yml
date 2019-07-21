@@ -35,8 +35,7 @@ stages:
           Source/LazyProperty/LazyProperty/LazyProperty.csproj
           Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
         # modifyOutputPath: false
-        arguments: '-o $(System.DefaultWorkingDirectory)/dist'
-        configuration: "Release-Beta"
+        arguments: '-p:Configuration=Release-Beta -o $(System.DefaultWorkingDirectory)/dist'
     
     # - task: DotNetCoreCLI@2
     #   displayName: 'dotnet pack'
