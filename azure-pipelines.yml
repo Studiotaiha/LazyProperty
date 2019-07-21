@@ -14,9 +14,9 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    projects: 'Source\LazyProperty'
+    workingDirectory: 'Source/LazyProperty'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: 'Source\LazyProperty'
+    workingDirectory: 'Source/LazyProperty'
