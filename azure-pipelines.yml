@@ -29,7 +29,7 @@ stages:
       inputs:
         command: 'pack'
         packagesToPack: "Source/LazyProperty/LazyProperty/LazyProperty.csproj"
-        arguments: '--configuration $(BuildConfiguration)'
+        # arguments: '--configuration $(BuildConfiguration)'
         packDirectory: '$(System.DefaultWorkingDirectory)/dist'
         
     - task: DotNetCoreCLI@2
@@ -37,7 +37,7 @@ stages:
       inputs:
         command: 'pack'
         packagesToPack: "Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj"
-        arguments: '--configuration $(BuildConfiguration)'
+        # arguments: '--configuration $(BuildConfiguration)'
         packDirectory: '$(System.DefaultWorkingDirectory)/dist'
         verbosityPack: Normal
       
@@ -68,3 +68,4 @@ stages:
           nuGetFeedType: external
           publishFeedCredentials: 'Studiotaiha NuGet'
           verbosityPush: Normal
+          allowPackageConflicts: true
