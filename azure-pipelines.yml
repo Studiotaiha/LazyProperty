@@ -35,6 +35,7 @@ stages:
           Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
         verbosityPack: Normal
         verbosityRestore: Normal
+        arguments: '-o $(System.DefaultWorkingDirectory)/dist'
         configuration: $(BuildConfiguration)
         
     
@@ -44,27 +45,27 @@ stages:
     #     Contents: Source\LazyProperty\**\bin\**\*.nupkg
     #     TargetFolder: '$(System.DefaultWorkingDirectory)/dist'
 
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet pack'
-      inputs:
-        command: 'pack'
-        packagesToPack: Source/LazyProperty/LazyProperty/LazyProperty.csproj
-        packDirectory: '$(System.DefaultWorkingDirectory)/dist'
-        nobuild: true
-        verbosityPack: Normal
-        verbosityRestore: Normal
-        configuration: $(BuildConfiguration)
+    # - task: DotNetCoreCLI@2
+    #   displayName: 'dotnet pack'
+    #   inputs:
+    #     command: 'pack'
+    #     packagesToPack: Source/LazyProperty/LazyProperty/LazyProperty.csproj
+    #     packDirectory: '$(System.DefaultWorkingDirectory)/dist'
+    #     nobuild: true
+    #     verbosityPack: Normal
+    #     verbosityRestore: Normal
+    #     configuration: $(BuildConfiguration)
         
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet pack (LazyProperty.Reactive)'
-      inputs:
-        command: 'pack'
-        packagesToPack: Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
-        packDirectory: '$(System.DefaultWorkingDirectory)/dist'
-        nobuild: true
-        verbosityPack: Normal
-        verbosityRestore: Normal
-        configuration: $(BuildConfiguration)
+    # - task: DotNetCoreCLI@2
+    #   displayName: 'dotnet pack (LazyProperty.Reactive)'
+    #   inputs:
+    #     command: 'pack'
+    #     packagesToPack: Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
+    #     packDirectory: '$(System.DefaultWorkingDirectory)/dist'
+    #     nobuild: true
+    #     verbosityPack: Normal
+    #     verbosityRestore: Normal
+    #     configuration: $(BuildConfiguration)
       
     - publish: dist
       artifact: nupkg
