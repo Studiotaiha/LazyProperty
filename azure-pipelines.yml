@@ -10,8 +10,8 @@ trigger:
 
 pr: none
 
-variables:
-  BuildConfiguration: 'Release'
+# variables:
+#   BuildConfiguration: 'Release'
 
 stages:
 - stage: Build
@@ -50,15 +50,15 @@ stages:
         # configuration: $(BuildConfiguration)
         # workingDirectory: Source/LazyProperty/LazyProperty
         
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet pack (LazyProperty.Reactive)'
-      inputs:
-        command: 'pack'
-        packagesToPack: Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
-        packDirectory: '$(System.DefaultWorkingDirectory)/dist'
-        verbosityPack: Normal
-        configuration: $(BuildConfiguration)
-        workingDirectory: Source/LazyProperty/LazyProperty.Reactive
+    # - task: DotNetCoreCLI@2
+    #   displayName: 'dotnet pack (LazyProperty.Reactive)'
+    #   inputs:
+    #     command: 'pack'
+    #     packagesToPack: Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
+    #     packDirectory: '$(System.DefaultWorkingDirectory)/dist'
+    #     verbosityPack: Normal
+    #     configuration: $(BuildConfiguration)
+    #     workingDirectory: Source/LazyProperty/LazyProperty.Reactive
       
     - publish: dist
       artifact: nupkg
