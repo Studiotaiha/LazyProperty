@@ -8,14 +8,22 @@ trigger:
 - develop
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-2019'
 
 steps:
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:
     command: 'pack'
-    packagesToPack: "Source/**/*.csproj"
+    packagesToPack: "Source/LazyProperty/LazyProperty/LazyProperty.csproj"
+    arguments: '--configuration $(BuildConfiguration)'
+    packDirectory: '$(System.DefaultWorkingDirectory)/dist'
+    
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    command: 'pack'
+    packagesToPack: "Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj"
     arguments: '--configuration $(BuildConfiguration)'
     packDirectory: '$(System.DefaultWorkingDirectory)/dist'
   
