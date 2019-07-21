@@ -27,27 +27,29 @@ stages:
         includePreviewVersions: true
 
     - task: DotNetCoreCLI@2
-      displayName: 'dotnet build (LazyProperty)'
+      displayName: 'dotnet build'
       inputs:
         command: 'build'
-        projects: "Source/LazyProperty/LazyProperty/LazyProperty.csproj"
+        projects: |
+          "Source/LazyProperty/LazyProperty/LazyProperty.csproj"
+          "Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj"
         verbosityPack: Normal
         verbosityRestore: Normal
         configuration: $(BuildConfiguration)
         
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet build (LazyProperty.Reactive)'
-      inputs:
-        command: 'build'
-        projects: "Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj"
-        verbosityPack: Normal
-        verbosityRestore: Normal
-        configuration: $(BuildConfiguration)
+    # - task: DotNetCoreCLI@2
+    #   displayName: 'dotnet build (LazyProperty.Reactive)'
+    #   inputs:
+    #     command: 'build'
+    #     projects: "Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj"
+    #     verbosityPack: Normal
+    #     verbosityRestore: Normal
+    #     configuration: $(BuildConfiguration)
     
     - task: CopyFiles@2
       inputs:
         SourceFolder: 
-        Contents: 'Source/LazyProperty/**/bin/**/*.nupkg'
+        Contents: Source\LazyProperty\**\bin\**\*.nupkg
         TargetFolder: '$(System.DefaultWorkingDirectory)/dist'
 
     # - task: DotNetCoreCLI@2
