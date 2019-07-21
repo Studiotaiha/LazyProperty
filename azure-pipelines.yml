@@ -20,12 +20,12 @@ stages:
     pool:
       vmImage: 'windows-2019'
     steps:
-    # - task: UseDotNet@2
-    #   inputs:
-    #     packageType: 'sdk'
-    #     #version: '3.0.100-preview6-012264'
-    #     version: '2.2.301'
-    #     includePreviewVersions: true
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '3.0.100-preview6-012264'
+        #version: '2.2.301'
+        includePreviewVersions: true
 
     # - task: DotNetCoreCLI@2
     #   displayName: 'dotnet build'
@@ -44,6 +44,7 @@ stages:
       displayName: 'dotnet pack'
       inputs:
         command: 'pack'
+        arguments: '--configuration Release-beta'
         packagesToPack: 'Source/LazyProperty/LazyProperty/LazyProperty.csproj"'
         packDirectory: '$(System.DefaultWorkingDirectory)/dist'
         verbosityPack: Normal
