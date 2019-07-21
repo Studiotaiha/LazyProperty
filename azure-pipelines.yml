@@ -50,6 +50,7 @@ stages:
         command: 'pack'
         packagesToPack: "Source/LazyProperty/LazyProperty/LazyProperty.csproj"
         packDirectory: '$(System.DefaultWorkingDirectory)/dist'
+        nobuild: true
         verbosityPack: Normal
         verbosityRestore: Normal
         configuration: $(BuildConfiguration)
@@ -60,6 +61,7 @@ stages:
         command: 'pack'
         packagesToPack: "Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj"
         packDirectory: '$(System.DefaultWorkingDirectory)/dist'
+        nobuild: true
         verbosityPack: Normal
         verbosityRestore: Normal
         configuration: $(BuildConfiguration)
