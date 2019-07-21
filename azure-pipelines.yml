@@ -12,16 +12,14 @@ pool:
 
 steps:
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet test'
-  inputs:
-    command: 'test'
-    projects: 'Tests/LazyProperty.Tests/LazyProperty.Tests.csproj'
-    arguments: '--configuration $(BuildConfiguration)'
-    workingDirectory: 'Source/LazyProperty'
-
-- task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:
-    command: 'build'
+    command: 'pack'
+    packagesToPack: "Source/**/*.csproj"
     arguments: '--configuration $(BuildConfiguration)'
-    workingDirectory: 'Source/LazyProperty'
+    packDirectory: '$(System.DefaultWorkingDirectory)/dist'
+  
+- publish: dist
+  artifact: nupkg
+  displayName: 'Publish artifacts'
+
