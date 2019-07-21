@@ -4,36 +4,67 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
-- develop
+  branches:
+    include:
+    - release-preview
 
-pool:
-  vmImage: 'windows-2019'
+variables:
+  BuildConfiguration: 'Release-Beta'
 
-steps:
-- task: UseDotNet@2
-  inputs:
-    packageType: 'sdk'
-    version: '3.0.100-preview6-012264'
-    includePreviewVersions: true
+stages:
+- stage: Build
+  jobs:
+  - job: BuildPackages
+    pool:
+      vmImage: 'windows-2019'
+    steps:
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '3.0.100-preview6-012264'
+        includePreviewVersions: true
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet build'
-  inputs:
-    command: 'pack'
-    packagesToPack: "Source/LazyProperty/LazyProperty/LazyProperty.csproj"
-    # arguments: '--configuration $(BuildConfiguration)'
-    packDirectory: '$(System.DefaultWorkingDirectory)/dist'
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build'
+      inputs:
+        command: 'pack'
+        packagesToPack: "Source/LazyProperty/LazyProperty/LazyProperty.csproj"
+        arguments: '--configuration $(BuildConfiguration)'
+        packDirectory: '$(System.DefaultWorkingDirectory)/dist'
+        
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build'
+      inputs:
+        command: 'pack'
+        packagesToPack: "Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj"
+        arguments: '--configuration $(BuildConfiguration)'
+        packDirectory: '$(System.DefaultWorkingDirectory)/dist'
+        verbosityPack: Normal
+      
+    - publish: dist
+      artifact: nupkg
+      displayName: 'Publish artifacts'
     
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet build'
-  inputs:
-    command: 'pack'
-    packagesToPack: "Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj"
-    # arguments: '--configuration $(BuildConfiguration)'
-    packDirectory: '$(System.DefaultWorkingDirectory)/dist'
-  
-- publish: dist
-  artifact: nupkg
-  displayName: 'Publish artifacts'
+- stage: Publish
+  dependsOn:
+  - Build
+  condition: succeeded()
+  jobs:
+  - job: PublishNugetPackages
+    pool:
+      vmImage: 'windows-2019'
+    steps:
+      - checkout: none
 
+      - download: current
+        artifact: nupkg
+        displayName: 'Download artifact'
+      
+      - task: NuGetCommand@2
+        displayName: 'NuGet push'
+        inputs:
+          command: push
+          packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg'
+          nuGetFeedType: external
+          publishFeedCredentials: 'Studiotaiha NuGet'
+          verbosityPush: Normal
