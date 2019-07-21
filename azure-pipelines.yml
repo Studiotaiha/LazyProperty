@@ -27,29 +27,26 @@ stages:
         #version: '2.2.301'
         includePreviewVersions: true
 
-    # - task: DotNetCoreCLI@2
-    #   displayName: 'dotnet build'
-    #   inputs:
-    #     command: 'build'
-    #     projects: |
-    #       Source/LazyProperty/LazyProperty/LazyProperty.csproj
-    #       Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
-    #     verbosityPack: Normal
-    #     verbosityRestore: Normal
-    #     # modifyOutputPath: false
-    #     # arguments: '-o $(System.DefaultWorkingDirectory)/build'
-    #     configuration: $(BuildConfiguration)
-    
     - task: DotNetCoreCLI@2
-      displayName: 'dotnet pack'
+      displayName: 'dotnet build'
       inputs:
-        command: 'pack'
-        arguments: '--configuration Release-Beta'
-        packagesToPack: 'Source/LazyProperty/LazyProperty/LazyProperty.csproj"'
-        packDirectory: '$(System.DefaultWorkingDirectory)/dist'
-        verbosityPack: Normal
-        # configuration: $(BuildConfiguration)
-        # workingDirectory: Source/LazyProperty/LazyProperty
+        command: 'build'
+        projects: |
+          Source/LazyProperty/LazyProperty/LazyProperty.csproj
+          Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
+        # modifyOutputPath: false
+        arguments: '-o $(System.DefaultWorkingDirectory)/dist'
+    
+    # - task: DotNetCoreCLI@2
+    #   displayName: 'dotnet pack'
+    #   inputs:
+    #     command: 'pack'
+    #     arguments: '--configuration Release-Beta'
+    #     packagesToPack: 'Source/LazyProperty/LazyProperty/LazyProperty.csproj"'
+    #     packDirectory: '$(System.DefaultWorkingDirectory)/dist'
+    #     verbosityPack: Normal
+    #     # configuration: $(BuildConfiguration)
+    #     # workingDirectory: Source/LazyProperty/LazyProperty
         
     # - task: DotNetCoreCLI@2
     #   displayName: 'dotnet pack (LazyProperty.Reactive)'
