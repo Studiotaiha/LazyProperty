@@ -31,8 +31,8 @@ stages:
       inputs:
         command: 'build'
         projects: |
-          "Source/LazyProperty/LazyProperty/LazyProperty.csproj"
-          "Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj"
+          Source/LazyProperty/LazyProperty/LazyProperty.csproj
+          Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
         verbosityPack: Normal
         verbosityRestore: Normal
         configuration: $(BuildConfiguration)
