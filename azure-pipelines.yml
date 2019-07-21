@@ -8,6 +8,8 @@ trigger:
     include:
     - release-preview
 
+pr: none
+
 variables:
   BuildConfiguration: 'Release-Beta'
 
@@ -27,9 +29,8 @@ stages:
     - task: DotNetCoreCLI@2
       displayName: 'dotnet build (LazyProperty)'
       inputs:
-        command: 'build'
-        packagesToPack: "Source/LazyProperty/LazyProperty/LazyProperty.csproj"
-        packDirectory: '$(System.DefaultWorkingDirectory)/dist'
+        command: 'pack'
+        projects: "Source/LazyProperty/LazyProperty/LazyProperty.csproj"
         verbosityPack: Normal
         verbosityRestore: Normal
         configuration: $(BuildConfiguration)
@@ -37,7 +38,26 @@ stages:
     - task: DotNetCoreCLI@2
       displayName: 'dotnet build (LazyProperty.Reactive)'
       inputs:
-        command: 'build'
+        command: 'pack'
+        projects: "Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj"
+        verbosityPack: Normal
+        verbosityRestore: Normal
+        configuration: $(BuildConfiguration)
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet pack (LazyProperty)'
+      inputs:
+        command: 'pack'
+        packagesToPack: "Source/LazyProperty/LazyProperty/LazyProperty.csproj"
+        packDirectory: '$(System.DefaultWorkingDirectory)/dist'
+        verbosityPack: Normal
+        verbosityRestore: Normal
+        configuration: $(BuildConfiguration)
+        
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet pack (LazyProperty.Reactive)'
+      inputs:
+        command: 'pack'
         packagesToPack: "Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj"
         packDirectory: '$(System.DefaultWorkingDirectory)/dist'
         verbosityPack: Normal
