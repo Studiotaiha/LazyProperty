@@ -23,27 +23,28 @@ stages:
     - task: UseDotNet@2
       inputs:
         packageType: 'sdk'
-        version: '3.0.100-preview6-012264'
+        #version: '3.0.100-preview6-012264'
+        version: '2.2.6'
         includePreviewVersions: true
 
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet build'
-      inputs:
-        command: 'build'
-        projects: |
-          Source/LazyProperty/LazyProperty/LazyProperty.csproj
-          Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
-        verbosityPack: Normal
-        verbosityRestore: Normal
-        # modifyOutputPath: false
-        # arguments: '-o $(System.DefaultWorkingDirectory)/build'
-        configuration: $(BuildConfiguration)
+    # - task: DotNetCoreCLI@2
+    #   displayName: 'dotnet build'
+    #   inputs:
+    #     command: 'build'
+    #     projects: |
+    #       Source/LazyProperty/LazyProperty/LazyProperty.csproj
+    #       Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
+    #     verbosityPack: Normal
+    #     verbosityRestore: Normal
+    #     # modifyOutputPath: false
+    #     # arguments: '-o $(System.DefaultWorkingDirectory)/build'
+    #     configuration: $(BuildConfiguration)
   
     - task: DotNetCoreCLI@2
       displayName: 'dotnet pack'
       inputs:
         command: 'pack'
-        packagesToPack: "Source/LazyProperty/LazyProperty/LazyProperty.csproj"
+        packagesToPack: 'Source/LazyProperty/LazyProperty/LazyProperty.csproj"'
         packDirectory: '$(System.DefaultWorkingDirectory)/dist'
         verbosityPack: Normal
         # configuration: $(BuildConfiguration)
