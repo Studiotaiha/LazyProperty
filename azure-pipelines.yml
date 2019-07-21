@@ -29,18 +29,18 @@ stages:
       inputs:
         command: 'pack'
         packagesToPack: "Source/LazyProperty/LazyProperty/LazyProperty.csproj"
-        # arguments: '--configuration $(BuildConfiguration)'
         packDirectory: '$(System.DefaultWorkingDirectory)/dist'
         verbosityPack: Normal
+        configuration: $(BuildConfiguration)
         
     - task: DotNetCoreCLI@2
       displayName: 'dotnet build (LazyProperty.Reactive)'
       inputs:
         command: 'pack'
         packagesToPack: "Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj"
-        # arguments: '--configuration $(BuildConfiguration)'
         packDirectory: '$(System.DefaultWorkingDirectory)/dist'
         verbosityPack: Normal
+        configuration: $(BuildConfiguration)
       
     - publish: dist
       artifact: nupkg
