@@ -53,6 +53,7 @@ stages:
         packDirectory: '$(System.DefaultWorkingDirectory)/dist'
         verbosityPack: Normal
         configuration: $(BuildConfiguration)
+        workingDirectory: Source/LazyProperty/LazyProperty
         
     - task: DotNetCoreCLI@2
       displayName: 'dotnet pack (LazyProperty.Reactive)'
@@ -62,6 +63,7 @@ stages:
         packDirectory: '$(System.DefaultWorkingDirectory)/dist'
         verbosityPack: Normal
         configuration: $(BuildConfiguration)
+        workingDirectory: Source/LazyProperty/LazyProperty.Reactive
       
     - publish: dist
       artifact: nupkg
