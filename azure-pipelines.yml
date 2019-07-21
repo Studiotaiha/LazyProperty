@@ -34,29 +34,7 @@ stages:
         projects: |
           Source/LazyProperty/LazyProperty/LazyProperty.csproj
           Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
-        # modifyOutputPath: false
         arguments: '-p:Configuration=Release-Beta -o $(System.DefaultWorkingDirectory)/dist'
-    
-    # - task: DotNetCoreCLI@2
-    #   displayName: 'dotnet pack'
-    #   inputs:
-    #     command: 'pack'
-    #     arguments: '--configuration Release-Beta'
-    #     packagesToPack: 'Source/LazyProperty/LazyProperty/LazyProperty.csproj"'
-    #     packDirectory: '$(System.DefaultWorkingDirectory)/dist'
-    #     verbosityPack: Normal
-    #     # configuration: $(BuildConfiguration)
-    #     # workingDirectory: Source/LazyProperty/LazyProperty
-        
-    # - task: DotNetCoreCLI@2
-    #   displayName: 'dotnet pack (LazyProperty.Reactive)'
-    #   inputs:
-    #     command: 'pack'
-    #     packagesToPack: Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
-    #     packDirectory: '$(System.DefaultWorkingDirectory)/dist'
-    #     verbosityPack: Normal
-    #     configuration: $(BuildConfiguration)
-    #     workingDirectory: Source/LazyProperty/LazyProperty.Reactive
       
     - publish: dist
       artifact: nupkg
@@ -77,12 +55,12 @@ stages:
         artifact: nupkg
         displayName: 'Download artifact'
       
-      # - task: NuGetCommand@2
-      #   displayName: 'NuGet push'
-      #   inputs:
-      #     command: push
-      #     packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg'
-      #     nuGetFeedType: external
-      #     publishFeedCredentials: 'Studiotaiha NuGet'
-      #     verbosityPush: Normal
-      #     allowPackageConflicts: true
+      - task: NuGetCommand@2
+        displayName: 'NuGet push'
+        inputs:
+          command: push
+          packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg'
+          nuGetFeedType: external
+          publishFeedCredentials: 'Studiotaiha NuGet'
+          verbosityPush: Normal
+          allowPackageConflicts: true
