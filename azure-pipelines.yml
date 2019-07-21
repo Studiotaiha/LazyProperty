@@ -39,12 +39,12 @@ stages:
     #     # modifyOutputPath: false
     #     # arguments: '-o $(System.DefaultWorkingDirectory)/build'
     #     configuration: $(BuildConfiguration)
-  
+    
     - task: DotNetCoreCLI@2
       displayName: 'dotnet pack'
       inputs:
         command: 'pack'
-        arguments: '--configuration Release-beta'
+        arguments: '--configuration Release-Beta'
         packagesToPack: 'Source/LazyProperty/LazyProperty/LazyProperty.csproj"'
         packDirectory: '$(System.DefaultWorkingDirectory)/dist'
         verbosityPack: Normal
