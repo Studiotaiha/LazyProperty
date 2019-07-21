@@ -8,7 +8,7 @@ trigger:
 - develop
 
 pool:
-  vmImage: 'windows-'
+  vmImage: 'windows-2019'
 
 steps:
 - task: UseDotNet@2
