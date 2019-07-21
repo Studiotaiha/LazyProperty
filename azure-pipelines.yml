@@ -11,7 +11,7 @@ trigger:
 pr: none
 
 variables:
-  BuildConfiguration: 'Release-Beta'
+  BuildConfiguration: 'Release'
 
 stages:
 - stage: Build
@@ -93,12 +93,12 @@ stages:
         artifact: nupkg
         displayName: 'Download artifact'
       
-      - task: NuGetCommand@2
-        displayName: 'NuGet push'
-        inputs:
-          command: push
-          packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg'
-          nuGetFeedType: external
-          publishFeedCredentials: 'Studiotaiha NuGet'
-          verbosityPush: Normal
-          allowPackageConflicts: true
+      # - task: NuGetCommand@2
+      #   displayName: 'NuGet push'
+      #   inputs:
+      #     command: push
+      #     packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg'
+      #     nuGetFeedType: external
+      #     publishFeedCredentials: 'Studiotaiha NuGet'
+      #     verbosityPush: Normal
+      #     allowPackageConflicts: true
