@@ -39,31 +39,40 @@ stages:
         # arguments: '-o $(System.DefaultWorkingDirectory)/build'
         configuration: $(BuildConfiguration)
   
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet pack'
+      inputs:
+        command: pack
+        packagesToPack: 'Source/**/*.csproj'
+        packDirectory: '$(System.DefaultWorkingDirectory)/dist'
+        verbosityPack: Normal
+
+
     # - task: CopyFiles@2
     #   inputs:
     #     SourceFolder: 
     #     Contents: Source\LazyProperty\**\bin\**\*.nupkg
     #     TargetFolder: '$(System.DefaultWorkingDirectory)/dist'
-
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet pack'
-      inputs:
-        command: 'pack'
-        packagesToPack: Source/LazyProperty/LazyProperty/LazyProperty.csproj
-        packDirectory: '$(System.DefaultWorkingDirectory)/dist'
-        verbosityPack: Normal
-        configuration: $(BuildConfiguration)
-        workingDirectory: Source/LazyProperty/LazyProperty
+    
+    # - task: DotNetCoreCLI@2
+    #   displayName: 'dotnet pack'
+    #   inputs:
+    #     command: 'pack'
+    #     packagesToPack: Source/LazyProperty/LazyProperty/LazyProperty.csproj
+    #     packDirectory: '$(System.DefaultWorkingDirectory)/dist'
+    #     verbosityPack: Normal
+    #     configuration: $(BuildConfiguration)
+    #     workingDirectory: Source/LazyProperty/LazyProperty
         
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet pack (LazyProperty.Reactive)'
-      inputs:
-        command: 'pack'
-        packagesToPack: Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
-        packDirectory: '$(System.DefaultWorkingDirectory)/dist'
-        verbosityPack: Normal
-        configuration: $(BuildConfiguration)
-        workingDirectory: Source/LazyProperty/LazyProperty.Reactive
+    # - task: DotNetCoreCLI@2
+    #   displayName: 'dotnet pack (LazyProperty.Reactive)'
+    #   inputs:
+    #     command: 'pack'
+    #     packagesToPack: Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
+    #     packDirectory: '$(System.DefaultWorkingDirectory)/dist'
+    #     verbosityPack: Normal
+    #     configuration: $(BuildConfiguration)
+    #     workingDirectory: Source/LazyProperty/LazyProperty.Reactive
       
     - publish: dist
       artifact: nupkg
