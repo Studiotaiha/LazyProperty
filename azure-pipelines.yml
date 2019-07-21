@@ -10,8 +10,8 @@ trigger:
 
 pr: none
 
-# variables:
-#   BuildConfiguration: 'Release'
+variables:
+  BuildConfiguration: 'Release-Beta'
 
 stages:
 - stage: Build
