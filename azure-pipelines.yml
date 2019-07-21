@@ -1,0 +1,66 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  branches:
+    include:
+    - release-preview
+
+pr: none
+
+variables:
+  BuildConfiguration: 'Release-Beta'
+
+stages:
+- stage: Build
+  jobs:
+  - job: BuildPackages
+    pool:
+      vmImage: 'windows-2019'
+    steps:
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '3.0.100-preview6-012264'
+        #version: '2.2.301'
+        includePreviewVersions: true
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build'
+      inputs:
+        command: 'build'
+        projects: |
+          Source/LazyProperty/LazyProperty/LazyProperty.csproj
+          Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
+        arguments: '-p:Configuration=Release-Beta -o $(System.DefaultWorkingDirectory)/dist'
+      
+    - publish: dist
+      artifact: nupkg
+      displayName: 'Publish artifacts'
+    
+- stage: Publish
+  dependsOn:
+  - Build
+  condition: succeeded()
+  jobs:
+  - job: PublishNugetPackages
+    pool:
+      vmImage: 'windows-2019'
+    steps:
+      - checkout: none
+
+      - download: current
+        artifact: nupkg
+        displayName: 'Download artifact'
+      
+      - task: NuGetCommand@2
+        displayName: 'NuGet push'
+        inputs:
+          command: push
+          packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg'
+          nuGetFeedType: external
+          publishFeedCredentials: 'Studiotaiha NuGet'
+          verbosityPush: Normal
+          allowPackageConflicts: true
