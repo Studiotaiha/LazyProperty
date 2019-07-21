@@ -15,6 +15,7 @@ steps:
   displayName: 'dotnet test'
   inputs:
     command: 'test'
+    projects: 'Tests/LazyProperty.Tests/LazyProperty.Tests.csproj'
     arguments: '--configuration $(BuildConfiguration)'
     workingDirectory: 'Source/LazyProperty'
 
