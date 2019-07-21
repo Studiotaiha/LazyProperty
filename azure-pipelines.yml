@@ -46,7 +46,8 @@ stages:
     
     - task: CopyFiles@2
       inputs:
-        Contents: '**/$(BuildConfiguration)/**/*.nupkg'
+        SourceFolder: 
+        Contents: 'Source/LazyProperty/**/bin/**/*.nupkg'
         TargetFolder: '$(System.DefaultWorkingDirectory)/dist'
 
     # - task: DotNetCoreCLI@2
