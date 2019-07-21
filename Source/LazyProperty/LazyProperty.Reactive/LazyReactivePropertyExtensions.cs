@@ -21,20 +21,20 @@ namespace Studiotaiha.LazyProperty
 
 		#region with InitialValueProvider
 
-		public static ReactiveProperty<T> LazyReactiveProperty<T>(
-			this IReactiveLazyPropertyHolder target,
-			Func<T> initialValueProvider,
-			ReactivePropertyMode mode = ReactivePropertyMode.Default,
-			IEqualityComparer<T> equalityComparer = null,
-			[CallerMemberName]string propertyName = null)
-		{
-			ReactiveProperty<T> createReactiveProperty()
-			{
-				return new ReactiveProperty<T>(initialValueProvider.Invoke(), mode, equalityComparer);
-			}
+		//public static ReactiveProperty<T> LazyReactiveProperty<T>(
+		//	this IReactiveLazyPropertyHolder target,
+		//	Func<T> initialValueProvider,
+		//	ReactivePropertyMode mode = ReactivePropertyMode.Default,
+		//	IEqualityComparer<T> equalityComparer = null,
+		//	[CallerMemberName]string propertyName = null)
+		//{
+		//	ReactiveProperty<T> createReactiveProperty()
+		//	{
+		//		return new ReactiveProperty<T>(initialValueProvider.Invoke(), mode, equalityComparer);
+		//	}
 
-			return target.LazyReactiveProperty(createReactiveProperty, propertyName);
-		}
+		//	return target.LazyReactiveProperty(createReactiveProperty, propertyName);
+		//}
 
 		public static ReactiveProperty<T> LazyReactiveProperty<T>(
 			this IReactiveLazyPropertyHolder target,
