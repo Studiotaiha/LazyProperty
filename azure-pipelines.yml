@@ -8,9 +8,15 @@ trigger:
 - develop
 
 pool:
-  vmImage: 'windows-2019'
+  vmImage: 'windows-'
 
 steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '3.0.100-preview6-012264'
+    includePreviewVersions: true
+
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:
