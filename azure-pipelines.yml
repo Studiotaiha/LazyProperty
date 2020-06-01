@@ -51,7 +51,15 @@ stages:
           Source/LazyProperty/LazyProperty/LazyProperty.csproj
           Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
         arguments: '-p:Configuration=$(BuildConfiguration) -o $(System.DefaultWorkingDirectory)/dist'
-      
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet test'
+      inputs:
+        command: 'test'
+        projects: |
+          Source/LazyProperty/Tests/LazyProperty.Tests/LazyProperty.Tests.csproj
+        arguments: '-p:Configuration=$(BuildConfiguration)'
+
     - publish: dist
       artifact: nupkg
       displayName: 'Publish artifacts'
