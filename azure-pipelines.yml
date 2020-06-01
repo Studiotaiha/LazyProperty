@@ -6,8 +6,7 @@
 trigger:
   branches:
     include:
-    - release-preview
-    - manayome/initial
+    - master
     - develop
 
 pr: none
