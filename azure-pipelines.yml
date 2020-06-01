@@ -5,6 +5,11 @@ trigger:
     - master
     - develop
 
+pr:
+  autoCancel: true
+  branches:
+    include: master
+
 stages:
 - stage: Build
   jobs:
@@ -53,7 +58,7 @@ stages:
 - stage: Publish
   dependsOn:
   - Build
-  condition: succeeded()
+  condition: and(succeeded(), in(variables['Build.Reason'], 'PullRequest'))
   jobs:
   - job: PublishNugetPackages
     pool:
