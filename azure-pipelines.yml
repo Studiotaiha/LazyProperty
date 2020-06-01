@@ -59,7 +59,7 @@ stages:
 - stage: Publish
   dependsOn:
   - Build
-  condition: and(succeeded(), in(variables['Build.Reason'], 'PullRequest'))
+  condition: and(succeeded(), not(in(variables['Build.Reason'], 'PullRequest')))
   jobs:
   - job: PublishNugetPackages
     pool:
