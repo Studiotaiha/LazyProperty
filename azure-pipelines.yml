@@ -1,0 +1,82 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  branches:
+    include:
+    - master
+    - develop
+
+pr: none
+
+stages:
+- stage: Build
+  jobs:
+  - job: BuildPackages
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '3.1.300'
+        includePreviewVersions: true
+      
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          $tokens = "$(Build.SourceBranch)" -Split "/";
+          $sourceBranch = $tokens[2..($tokens.Length-1)] -Join "/";
+
+          $buildConfigurationMap = @{
+              "master" = "Release";  
+              "develop" = "Release-Beta";
+          };
+
+          $buildConfiguration = $buildConfigurationMap[$sourceBranch];
+          if(-not $buildConfiguration){
+              $buildConfiguration = "Release-Beta";
+          }
+          
+          echo "##vso[task.setvariable variable=BuildConfiguration]$buildConfiguration";
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build'
+      inputs:
+        command: 'build'
+        projects: |
+          Source/LazyProperty/LazyProperty/LazyProperty.csproj
+          Source/LazyProperty/LazyProperty.Reactive/LazyProperty.Reactive.csproj
+        arguments: '-p:Configuration=$(BuildConfiguration) -o $(System.DefaultWorkingDirectory)/dist'
+      
+    - publish: dist
+      artifact: nupkg
+      displayName: 'Publish artifacts'
+    
+- stage: Publish
+  dependsOn:
+  - Build
+  condition: succeeded()
+  jobs:
+  - job: PublishNugetPackages
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+      - checkout: none
+
+      - download: current
+        artifact: nupkg
+        displayName: 'Download artifact'
+      
+      - task: NuGetCommand@2
+        displayName: 'NuGet push'
+        inputs:
+          command: push
+          packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg'
+          nuGetFeedType: external
+          publishFeedCredentials: 'Studiotaiha NuGet'
+          verbosityPush: Normal
+          allowPackageConflicts: true

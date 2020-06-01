@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace>LazyProperty</RootNamespace>
+		<LangVersion>preview</LangVersion>
+
+		<Configurations>Debug;Release;Release-Beta</Configurations>
+		
+		<NoWarn>1701;1702;1591</NoWarn>
+		<WarningsAsErrors>NU1605</WarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<VersionPrefix>0.0.3</VersionPrefix>
+		<AssemblyVersion>$(VersionPrefix).0</AssemblyVersion>
+		<FileVersion>$(VersionPrefix).0</FileVersion>
+
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<RepositoryType>git</RepositoryType>
+		<PackageProjectUrl>https://github.com/Studiotaiha/LazyProperty</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Studiotaiha/LazyProperty</RepositoryUrl>
+		<Company>Studio Taiha</Company>
+		<Product>LazyProperty</Product>
+		<Authors>manayome</Authors>
+		<Copyright>(c)2019 Studio Taiha</Copyright>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Release-Beta'">
+		<VersionSuffix>beta</VersionSuffix>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	</PropertyGroup>
+</Project>
