@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace LazyProperty
 {
-	public class PropertyBag : INotificationPropertyBag
+	public class LazyPropertyHolderBase : INotificationPropertyHolder
 	{
 		[IgnoreDataMember]
 		public IEnumerable<KeyValuePair<string, object>> Properties => this.Bag;
@@ -17,12 +17,12 @@ namespace LazyProperty
 		[IgnoreDataMember]
 		private IDictionary<string, object> Bag { get; } = new Dictionary<string, object>();
 
-		public PropertyBag()
+		public LazyPropertyHolderBase()
 			: this(new Dictionary<string, object>())
 		{
 		}
 
-		public PropertyBag(IDictionary<string, object> bag)
+		public LazyPropertyHolderBase(IDictionary<string, object> bag)
 		{
 			this.Bag = bag ?? throw new ArgumentNullException(nameof(bag));
 		}

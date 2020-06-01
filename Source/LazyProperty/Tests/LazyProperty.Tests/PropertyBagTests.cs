@@ -67,7 +67,7 @@ namespace LazyProperty.Tests
 		public void TestChangeHandlerInvoked<T>(int[] setValues, bool[] shouldInvokedValues)
 		{
 			var propertyName = "Property-Name";
-			var bag = new PropertyBag();
+			var bag = new LazyPropertyHolderBase();
 
 			var prev = default(int);
 			for (var i = 0; i < setValues.Length; i++)
@@ -106,7 +106,7 @@ namespace LazyProperty.Tests
 		[Fact]
 		public void TestClear()
 		{
-			var bag = new PropertyBag();
+			var bag = new LazyPropertyHolderBase();
 
 			bag.PropertiesCount.Is(0);
 
@@ -125,7 +125,7 @@ namespace LazyProperty.Tests
 		{
 			var propertyName = "Property-" + (value?.ToString() ?? "null");
 
-			var bag = new PropertyBag();
+			var bag = new LazyPropertyHolderBase();
 
 			bag.SetValue(propertyName, value).Is(true);
 			bag.PropertiesCount.Is(1);
@@ -145,7 +145,7 @@ namespace LazyProperty.Tests
 		[Fact]
 		public void TestDeleteProperty()
 		{
-			var bag = new PropertyBag();
+			var bag = new LazyPropertyHolderBase();
 			var propertyName = "Property-Name";
 
 			bag.DeleteProperty<object>(propertyName).IsFalse();
@@ -158,7 +158,7 @@ namespace LazyProperty.Tests
 		[Fact]
 		public void TestTryGetValueReturnFalse()
 		{
-			var bag = new PropertyBag();
+			var bag = new LazyPropertyHolderBase();
 
 			var propertyName = "Property-Name";
 

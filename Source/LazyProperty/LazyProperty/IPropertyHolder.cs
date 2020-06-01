@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LazyProperty
 {
-	public interface IPropertyBag : ILazyPropertyHolder
+	public interface IPropertyHolder : ILazyPropertyHolder
 	{
 		IEnumerable<KeyValuePair<string, object>> Properties { get; }
 

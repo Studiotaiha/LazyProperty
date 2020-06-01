@@ -3,11 +3,10 @@ using System.Collections.Generic;
 
 namespace LazyProperty
 {
-
-	public static class PropertyBagExtensions
+	public static class PropertyHolderExtensions
 	{
 		public static bool DeleteProperty(
-			this IPropertyBag propertyBag,
+			this IPropertyHolder propertyBag,
 			string propertyName,
 			Action<object, object> onDeleting = null,
 			Action<object, object> onDeleted = null,
@@ -21,14 +20,14 @@ namespace LazyProperty
 		}
 
 		public static object GetValueAsObject(
-					this IPropertyBag propertyBag,
+			this IPropertyHolder propertyBag,
 			string propertyName)
 		{
 			return propertyBag.GetValue<object>(propertyName);
 		}
 
 		public static bool SetValueAsObject(
-			this IPropertyBag propertyBag,
+			this IPropertyHolder propertyBag,
 			string propertyName,
 			object value,
 			Action<object, object> onChanging = null,
@@ -46,7 +45,7 @@ namespace LazyProperty
 		}
 
 		public static bool TryGetValueAsObject(
-			this IPropertyBag propertyBag,
+			this IPropertyHolder propertyBag,
 			string propertyName,
 			out object value)
 		{
@@ -56,7 +55,7 @@ namespace LazyProperty
 		#region GetValue
 
 		public static TValue GetValueOrDefault<TValue>(
-			this IPropertyBag propertyBag,
+			this IPropertyHolder propertyBag,
 			string propertyName,
 			Func<string, TValue> defaultValueProvider)
 		{
@@ -68,7 +67,7 @@ namespace LazyProperty
 		}
 
 		public static TValue GetValueOrDefault<TValue>(
-			this IPropertyBag propertyBag,
+			this IPropertyHolder propertyBag,
 			string propertyName,
 			Func<TValue> defaultValueProvider)
 		{
@@ -80,7 +79,7 @@ namespace LazyProperty
 		}
 
 		public static TValue GetValueOrDefault<TValue>(
-			this IPropertyBag propertyBag,
+			this IPropertyHolder propertyBag,
 			string propertyName,
 			TValue defaultValue)
 		{
@@ -94,7 +93,7 @@ namespace LazyProperty
 		#region GetOrCreateValue
 
 		public static TValue GetOrCreateValue<TValue>(
-			this IPropertyBag propertyBag,
+			this IPropertyHolder propertyBag,
 			string propertyName,
 			Func<TValue> newValueProvider,
 			Action<TValue> onCreated = null)
@@ -113,7 +112,7 @@ namespace LazyProperty
 		}
 
 		public static TValue GetOrCreateValue<TValue>(
-			this IPropertyBag propertyBag,
+			this IPropertyHolder propertyBag,
 			string propertyName,
 			TValue newValue,
 			Action<TValue> onCreated = null)

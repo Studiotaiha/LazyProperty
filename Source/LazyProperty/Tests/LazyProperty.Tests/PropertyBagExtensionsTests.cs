@@ -15,7 +15,7 @@ namespace LazyProperty.Tests
 		[Fact]
 		public void TestTryGetValueAsObject()
 		{
-			var bag = new PropertyBag();
+			var bag = new LazyPropertyHolderBase();
 			var propertyName = "Property-Name";
 
 			bag.TryGetValueAsObject(propertyName, out _).IsFalse();
@@ -27,7 +27,7 @@ namespace LazyProperty.Tests
 		[Fact]
 		public void TestSetAndGetValueAsObject()
 		{
-			var bag = new PropertyBag();
+			var bag = new LazyPropertyHolderBase();
 			var propertyName = "Property-Name";
 
 			var values = new[] { 0, 1, 2.2, 3.3f, '4', "five", true, new object(), DateTimeOffset.MaxValue, TimeSpan.Zero };
@@ -47,7 +47,7 @@ namespace LazyProperty.Tests
 		[Fact]
 		public void TestGetValueOrDefault()
 		{
-			var bag = new PropertyBag();
+			var bag = new LazyPropertyHolderBase();
 			var propertyName = "Property-Name";
 
 			var values = new[] { 0, 1, 2.2, 3.3f, '4', "five", true, new object(), DateTimeOffset.MaxValue, TimeSpan.Zero };
@@ -72,7 +72,7 @@ namespace LazyProperty.Tests
 		[Fact]
 		public void TestDeletePropertyObject()
 		{
-			var bag = new PropertyBag();
+			var bag = new LazyPropertyHolderBase();
 			var propertyName = "Property-Name";
 
 			bag.DeleteProperty(propertyName).IsFalse();
