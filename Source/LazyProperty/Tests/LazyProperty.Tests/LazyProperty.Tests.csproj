@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.0</TargetFramework>
+		<RootNamespace>LazyProperty.Tests</RootNamespace>
+		<LangVersion>preview</LangVersion>
+
+		<Configurations>Debug;Release;Release-Beta</Configurations>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+		<NoWarn>1701;1702;1591</NoWarn>
+		<WarningsAsErrors>NU1605</WarningsAsErrors>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="ChainingAssertion.Core.Xunit" Version="0.3.1" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.0" />
+		<PackageReference Include="xunit" Version="2.4.1" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\..\LazyProperty\LazyProperty.csproj" />
+	</ItemGroup>
+</Project>
