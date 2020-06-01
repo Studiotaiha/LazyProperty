@@ -1,7 +1,7 @@
 using System;
 using Xunit.Abstractions;
 
-namespace Studiotaiha.LazyProperty.Tests
+namespace LazyProperty.Tests
 {
 	public class TestBase
 	{

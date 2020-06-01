@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace Studiotaiha.LazyProperty
+namespace LazyProperty
 {
 	public static class LazyPropertyExtensions
 	{

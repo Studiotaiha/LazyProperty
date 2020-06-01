@@ -1,6 +1,6 @@
 using System;
 
-namespace Studiotaiha.LazyProperty
+namespace LazyProperty
 {
 	public interface ILazyPropertyHolder
 	{

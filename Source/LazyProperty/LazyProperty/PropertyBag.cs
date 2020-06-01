@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace Studiotaiha.LazyProperty
+namespace LazyProperty
 {
 	public class PropertyBag : INotificationPropertyBag
 	{

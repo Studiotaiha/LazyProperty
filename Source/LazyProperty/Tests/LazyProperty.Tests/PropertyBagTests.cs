@@ -4,7 +4,7 @@ using ChainingAssertion;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Studiotaiha.LazyProperty.Tests
+namespace LazyProperty.Tests
 {
 	public class PropertyBagTests : TestBase
 	{

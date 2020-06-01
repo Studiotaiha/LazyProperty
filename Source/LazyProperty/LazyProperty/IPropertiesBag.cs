@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Studiotaiha.LazyProperty
+namespace LazyProperty
 {
 	public interface IPropertyBag : ILazyPropertyHolder
 	{

@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 
-namespace Studiotaiha.LazyProperty
+namespace LazyProperty
 {
 	public static class LazyReactivePropertyExtensions
 	{

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 
-namespace Studiotaiha.LazyProperty
+namespace LazyProperty
 {
 	public static class LazyAsyncReactiveCommandExtensions
 	{

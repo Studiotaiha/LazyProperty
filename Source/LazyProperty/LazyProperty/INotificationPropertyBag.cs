@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace Studiotaiha.LazyProperty
+namespace LazyProperty
 {
 	public interface INotificationPropertyBag : IPropertyBag, INotifyPropertyChanging, INotifyPropertyChanged
 	{

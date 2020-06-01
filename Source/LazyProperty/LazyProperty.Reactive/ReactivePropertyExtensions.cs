@@ -6,7 +6,7 @@ using System.Reactive.Linq;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 
-namespace Studiotaiha.LazyProperty
+namespace LazyProperty
 {
 	public interface IReactiveLazyPropertyHolder : ILazyPropertyHolder, IDisposable
 	{
