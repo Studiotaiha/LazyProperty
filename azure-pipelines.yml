@@ -72,6 +72,7 @@ stages:
       
       - task: NuGetCommand@2
         displayName: 'NuGet push'
+        continueOnError: true
         inputs:
           command: push
           packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg'
